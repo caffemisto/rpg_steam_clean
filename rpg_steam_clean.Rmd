@@ -1,0 +1,29 @@
+---
+title: "rpg_steam_clean"
+author: "Timmy Najmolhoda"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+mydata <- read.csv("rpg_steam_clean.csv")
+head(mydata)
+nrow(mydata)
+```
+```{r}
+slim_mydata <- subset(mydata, select = -c(lowest_estimated_owners_number, highest_estimated_owners_number, 	
+average_estimated_owners_number))
+slim_mydata
+```
+```{r}
+library(ggplot2)
+
+ggplot(slim_mydata, aes(x = release_year)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  labs(title = "RPGs by Release Year", x = "Year", y = "Number of RPGs Released")
+```
+
